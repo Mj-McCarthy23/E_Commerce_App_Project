@@ -3,7 +3,7 @@
 
 main(){
     Item x;
-    x.name = "apple";
+    x.name = "ORANGE";
     std::cout<<x.name;
     return 0;
 }
