@@ -7,4 +7,3 @@ main(){
     std::cout<<x.name;
     return 0;
 }
-
