@@ -43,12 +43,14 @@ template < typename T >
     // Function to print the DLL elements
     void printDLL() {
       NodeDLL < T > * temp = head_ref;
+      Item g;
 
       if (head_ref == NULL) {
         cout << "List is empty!" << endl;
       } else {
         while (temp != NULL) {
-          cout << temp -> data << ", ";
+            g = temp -> data;
+            g.displayInfo();
           temp = temp -> next;
         }
       }
@@ -76,93 +78,7 @@ template < typename T >
       }
       return new_node;
     }
-    // Function to delete nodes of the DLL adapted from Pesudo Code given in the
-    // slides (Lecture 7 pg 16)
-    void deleteNodepseudoDLL(NodeDLL < T > * nodedelete) {
-      // Check if DLL is empty
-      if (head_ref == NULL || nodedelete == NULL) {
-        if (nodedelete == NULL && head_ref != NULL) {
-          cout << "Nothing was deleted." << endl;
-        } else {
-          cout << "Nothing to be deleted. DLL is empty." << endl;
-        }
-        return;
-      } else {
-        // Address situation if head reference is being deleted
-        NodeDLL < T > * curr = head_ref;
-        NodeDLL < T > * prev = NULL;
-        // Traverse through the DLL
-        while (curr != nodedelete) {
-          prev = curr;
-          curr = curr -> next;
-        }
-        // Check if the node found is the only node in the list
-        if (curr == nodedelete && curr -> next == NULL && curr -> prev == NULL &&
-          curr == head_ref) {
-          // Update the head reference to the next node
-          head_ref = NULL;
-          free(curr);
-          cout << "Head node was deleted. Head node was the only node in the DLL" <<
-            endl;
-          return;
-        }
-        // Check if the node deleted is the first node and the DLL has more nodes
-        else if (curr == head_ref) {
-          head_ref = head_ref -> next;
-          // Make sure the previous of the head reference is pointing to NULL
-          head_ref -> prev = NULL;
-          cout << "Head node was deleted. Head node was not the only node in the "
-          "DLL" <<
-          endl;
-          delete curr;
-        }
-        // Check if the node deleted is the last node
-        else if (curr -> next == NULL) {
-          prev -> next = NULL;
-          cout << "Last node was deleted" << endl;
-          free(curr);
-        }
-        // Address the last situation where the node is not in the front or end of
-        // the DLL
-        else {
-          prev -> next = curr -> next;
-          (curr -> next) -> prev = curr -> prev;
-          cout << "Node deleted. Found within the DLL. Not head or last node." <<
-            endl;
-          delete curr;
-        }
-      }
-    }
-    // Function to delete Node given from Lecture Slides (Lecture 7 pg 26)
-    void deleteNodeDLL(NodeDLL < T > * nodedelete) {
-      // Check if DLL is empty
-      if (head_ref == NULL || nodedelete == NULL) {
-        if (nodedelete == NULL && head_ref != NULL) {
-          cout << "Nothing was deleted." << endl;
-        } else {
-          cout << "Nothing to be deleted. DLL is empty." << endl;
-        }
-        return;
-      }
-      // Check if the node deleted is the head of DLL
-      if (head_ref == nodedelete) {
-        head_ref = nodedelete -> next;
-        cout << "Head node was deleted." << endl;
-      }
-      // Change next if node to be deleted is not the last node on the DLL
-      if (nodedelete -> next != NULL) {
-        (nodedelete -> next) -> prev = nodedelete -> prev;
-        cout << "Node deleted is not the last Node." << endl;
-      }
-      // Change prev if node to be deleted is not the head node on the DLL
-      if (nodedelete -> prev != NULL) {
-        (nodedelete -> prev) -> next = nodedelete -> next;
-        cout << "Node deleted is not the first Node." << endl;
-      }
-      // Free space
-      free(nodedelete);
-      return;
-    }
+
     // Function to delete nodes of the DLL adapted from Pesudo Code given in the
     // slides (Lecture 7 pg 16)
     //The value passed
@@ -179,19 +95,23 @@ template < typename T >
           // Address situation if head reference is being deleted
           NodeDLL < T > * curr = head_ref;
           NodeDLL < T > * prev = NULL;
+          Item g;
+          g = curr -> data;
+          T x = g.getName();
           // Traverse through the DLL
-          while (curr -> data != key) {
+          while (x != key) {
             prev = curr;
             curr = curr -> next;
+            g = curr -> data;
+            x = g.getName();
             //Address situation where the key is not withing the SLL
             if (curr == NULL) {
               cout << "The key is not inside the SLL" << endl;
               return;
             }
-
           }
           // Check if the node found is the only node in the list
-          if (curr -> data == key && curr -> next == NULL && curr -> prev == NULL &&
+          if (x == key && curr -> next == NULL && curr -> prev == NULL &&
             curr == head_ref) {
             // Update the head reference to NULL
             head_ref = NULL;

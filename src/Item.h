@@ -43,6 +43,18 @@ public:
     float getPrice(){
         return price;
     }
+    //Method to print all the information
     
+    void displayInfo(){
+        cout << "The item name is:" << name <<endl;
+        cout << "The category of the item is:"<< cat << endl;
+        
+        cout << "The expiry date of the item is:" << exp << endl;
+        cout << "The price of the item is:"<< price << endl;
+        cout << "-------------------------------------" << endl;
+        
+    }
+    
+    //friend class DLL;
 };
 
